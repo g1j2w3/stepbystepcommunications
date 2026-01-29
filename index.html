@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step By Step Communications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yellow: #F7E135;
+            --dark-bg: #0a0a0a;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #f5f5f5;
+            --gray-text: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--gray-text);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-btn {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 12px 30px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #e6d030;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                        linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            display: flex;
+            align-items: center;
+            padding: 120px 80px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%231a1a2e;stop-opacity:1" /><stop offset="100%" style="stop-color:%230f0f23;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23grad)" width="1440" height="900"/></svg>');
+            opacity: 0.9;
+        }
+
+        /* Chicago Skyline Silhouette */
+        .skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(10,10,20,0.95) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .skyline::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: 
+                /* Willis Tower */
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 10% bottom / 80px 350px,
+                /* Hancock */
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 25% bottom / 60px 280px,
+                /* Various buildings */
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 35% bottom / 100px 200px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 45% bottom / 70px 180px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 55% bottom / 90px 220px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 65% bottom / 50px 150px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 75% bottom / 110px 190px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 85% bottom / 60px 160px,
+                linear-gradient(to top, #0d1117 0%, #1a1f2e 100%) no-repeat 95% bottom / 80px 140px;
+        }
+
+        /* Building windows (lights) */
+        .building-lights {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            height: 300px;
+        }
+
+        .building-lights::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(255,255,200,0.8) 1px, transparent 1px),
+                radial-gradient(circle, rgba(200,220,255,0.6) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,200,200,0.5) 1px, transparent 1px);
+            background-size: 40px 40px, 60px 50px, 80px 60px;
+            background-position: 0 0, 20px 25px, 40px 10px;
+            opacity: 0.4;
+        }
+
+        /* Water reflection */
+        .water-reflection {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, 
+                rgba(0,20,40,0.8) 0%,
+                rgba(20,60,100,0.3) 30%,
+                rgba(180,50,100,0.2) 60%,
+                rgba(50,100,150,0.3) 100%);
+        }
+
+        .water-reflection::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255,100,150,0.3) 20%, transparent 40%),
+                linear-gradient(90deg, transparent 60%, rgba(100,150,255,0.3) 80%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 48px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            line-height: 1.25;
+            margin-bottom: 40px;
+            letter-spacing: 0;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 15px 80px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            background: #e6d030;
+        }
+
+        .hero-video {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d1520 100%);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Network visualization effect */
+        .network-viz {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0,255,100,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 50% 30%, rgba(255,100,100,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 70% 50%, rgba(100,100,255,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 20% 60%, rgba(255,255,0,0.3) 2px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(255,0,255,0.3) 2px, transparent 2px);
+            opacity: 0.8;
+        }
+
+        .globe-visual {
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(100,200,255,0.3);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .globe-visual::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(100,200,255,0.2);
+            transform: rotateX(60deg);
+        }
+
+        .play-button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .play-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 12px;
+            color: var(--white);
+        }
+
+        .video-time {
+            font-family: monospace;
+        }
+
+        .video-progress {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        .video-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--yellow);
+            border-radius: 2px;
+        }
+
+        .video-icons {
+            display: flex;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .video-icon {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 80px;
+            background: var(--white);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .about-text {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .about-text h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .about-text p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--gray-text);
+            margin-bottom: 40px;
+        }
+
+        .learn-more-btn-dark {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 18px 50px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .learn-more-btn-dark:hover {
+            background: #333;
+        }
+
+        /* Services Section */
+        .services {
+            position: relative;
+            padding: 100px 80px;
+            min-height: 800px;
+            color: var(--white);
+        }
+
+        .services-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            z-index: -1;
+        }
+
+        .services-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+        }
+
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 48px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 0;
+        }
+
+        .services-intro {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 4px;
+        }
+
+        .service-card h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .service-card p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments {
+            position: relative;
+            padding: 100px 80px;
+            color: var(--white);
+            min-height: 700px;
+        }
+
+        .accomplishments-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            z-index: -1;
+        }
+
+        .accomplishments-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accomplishments h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 0;
+        }
+
+        .accomplishments-intro {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .key-achievements {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.85;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .achievement {
+            padding-right: 20px;
+        }
+
+        .achievement h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .achievement p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .diversity-link {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .diversity-link a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .read-more-accomplishments {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 25px 40px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .read-more-accomplishments:hover {
+            background: #e6d030;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 80px 60px;
+            background: var(--white);
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--black);
+            letter-spacing: 0;
+        }
+
+        .contact-email {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .contact-form {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            font-family: 'Source Sans Pro', sans-serif;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-bottom-color: var(--black);
+        }
+
+        .submit-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 18px 50px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 80px 80px;
+            background: var(--white);
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-contact {
+            text-align: left;
+        }
+
+        .footer-contact h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-contact a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .footer-links {
+            text-align: left;
+        }
+
+        .footer-links h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-close::before,
+        .mobile-nav-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        .mobile-nav-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            opacity: 0.7;
+        }
+
+        .mobile-nav .contact-btn {
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 120px 40px;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero-video {
+                max-width: 100%;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .services-grid,
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                flex-direction: column;
+                gap: 60px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .contact-btn.desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                padding: 100px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .about,
+            .services,
+            .accomplishments,
+            .contact,
+            footer {
+                padding: 60px 20px;
+            }
+
+            .services h2,
+            .accomplishments h2,
+            .contact-info h2 {
+                font-size: 32px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/logo.webp" alt="Step By Step Communications">
+        </a>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="accomplishments.html">Accomplishments</a>
+            <a href="clients.html">Clients</a>
+        </nav>
+        <button class="contact-btn desktop">CONTACT</button>
+        <div class="hamburger" onclick="toggleMobileNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-close" onclick="closeMobileNav()"></div>
+        <a href="index.html" onclick="closeMobileNav()">Home</a>
+        <a href="about.html" onclick="closeMobileNav()">About</a>
+        <a href="services.html" onclick="closeMobileNav()">Services</a>
+        <a href="accomplishments.html" onclick="closeMobileNav()">Accomplishments</a>
+        <a href="clients.html" onclick="closeMobileNav()">Clients</a>
+        <button class="contact-btn" onclick="closeMobileNav()">CONTACT</button>
+    </div>
+
+    <script>
+        function toggleMobileNav() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.querySelector('.hamburger').classList.remove('active');
+        }
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="skyline"></div>
+        <div class="building-lights"></div>
+        <div class="water-reflection"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Elevating Media Through Innovative Advertising Strategies</h1>
+                <button class="learn-more-btn">Learn More</button>
+            </div>
+            <div class="hero-video">
+                <div class="video-placeholder">
+                    <div class="network-viz"></div>
+                    <div class="globe-visual"></div>
+                    <div class="play-button"></div>
+                    <div class="video-controls">
+                        <span class="video-time">00:00 / 01:04</span>
+                        <div class="video-progress">
+                            <div class="video-progress-bar"></div>
+                        </div>
+                        <div class="video-icons">
+                            <span>🔊</span>
+                            <span>⚙️</span>
+                            <span>⛶</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    [Photo of Elverage Allen and partner]
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>Where innovation meets expertise in the realm of advertising, sales, and marketing.</h2>
+                <p>Led by the visionary Elverage Allen, our Illinois-based agency specializes in crafting dynamic advertising strategies across TV, podcasts, and streaming services. Renowned for our emphasis on multicultural marketing and strategic planning, we pride ourselves on creating impactful narratives that resonate across diverse audiences. Join us in exploring the frontier of media advertising, where your brand's story becomes our mission.</p>
+                <a href="about.html" class="learn-more-btn-dark">Learn more</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-bg"></div>
+        <div class="services-content">
+            <h2>Services</h2>
+            <p class="services-intro">At Step By Step Communications, we specialize in a range of services tailored to elevate your brand's presence in the media world. Our expertise includes developing innovative advertising sales strategies for television, podcasts, and streaming services. We are committed to delivering results through creative marketing, strategic planning, and a focus on multicultural markets. Our approach is centered on understanding your unique brand story and crafting a path to connect with diverse audiences effectively.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Advertising Sales Strategy Development</h3>
+                    <p>Crafting custom strategies for TV, podcasts, and streaming services to maximize advertising revenue.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Multicultural Marketing</h3>
+                    <p>Specializing in diverse market segments to create inclusive and effective advertising campaigns.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Strategic Planning and Brand Building</h3>
+                    <p>Focusing on long-term growth and brand positioning in highly competitive media markets.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Creative Marketing Solutions</h3>
+                    <p>Innovative approaches to marketing that resonate with target audiences and drive engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accomplishments Section -->
+    <section class="accomplishments" id="accomplishments">
+        <div class="accomplishments-bg"></div>
+        <div class="accomplishments-content">
+            <h2>Accomplishments</h2>
+            <p class="accomplishments-intro">Since its inception, Step By Step Communications, led by Elverage Allen, has set industry standards.</p>
+            <p class="key-achievements">Key achievements include:</p>
+            <div class="achievements-grid">
+                <div class="achievement">
+                    <h3>Exceptional Revenue Growth</h3>
+                    <p>Spearheaded an increase in advertising sales revenue from $3.7 million to over $34.5 million in just four years</p>
+                </div>
+                <div class="achievement">
+                    <h3>Award for Excellence in Diversity Marketing</h3>
+                    <p>Elverage Allen was honored as the Ad Sales Executive of the Year in Diversity Marketing by Broadcast & Cable Magazine in 2016.</p>
+                </div>
+                <div class="achievement">
+                    <h3>Strategic Agency Partnerships</h3>
+                    <p>Established and maintained significant partnerships with key advertising agencies across major U.S. cities, contributing to a substantial increase in general market advertising sales by 932% in under five years.</p>
+                </div>
+                <div class="achievement">
+                    <h3>Visibility Enhancement for Emerging Networks</h3>
+                    <p>Successfully raised the profile of new TV networks in the advertising industry through comprehensive strategies, including team development, market strategy implementation, and awareness campaigns.</p>
+                </div>
+            </div>
+            <p class="diversity-link">For more detailed information about Elverage Allen's recognition, you can visit <a href="http://www.thediversitydiscussion.com/speaker/elverage-allen/" target="_blank">The Diversity Discussion</a></p>
+            <button class="read-more-accomplishments">Read More on Accomplishments</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Contact us.</h2>
+                <a href="/cdn-cgi/l/email-protection#a8cdc4decddac9cfcdc9c4c4cdc6e8dbdccdd8cad1dbdccdd8cbc7c5c5ddc6c1cbc9dcc1c7c6db86c6cddc" class="contact-email"><span class="__cf_email__" data-cfemail="13767f657661727476727f7f767d5360677663716a60677663707c7e7e667d7a7072677a7c7d603d7d7667">[email&#160;protected]</span></a>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Name</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name <span>(required)</span></label>
+                            <input type="text" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name <span>(required)</span></label>
+                            <input type="text" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span>(required)</span></label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.webp" alt="Step By Step Communications">
+            </div>
+            <div class="footer-contact">
+                <h4>CONTACT</h4>
+                <a href="/cdn-cgi/l/email-protection#cbaea7bdaeb9aaacaeaaa7a7aea58bb8bfaebba9b2b8bfaebba8a4a6a6bea5a2a8aabfa2a4a5b8e5a5aebf"><span class="__cf_email__" data-cfemail="b9dcd5cfdccbd8dedcd8d5d5dcd7f9cacddcc9dbc0cacddcc9dad6d4d4ccd7d0dad8cdd0d6d7ca97d7dccd">[email&#160;protected]</span></a>
+            </div>
+            <div class="footer-links">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="index.html">Home</a>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accomplishments - Step By Step Communications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yellow: #F7E135;
+            --green: #009A44;
+            --dark-bg: #0a0a0a;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #f5f5f5;
+            --gray-text: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--gray-text);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-btn {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 12px 30px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #e6d030;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-close::before,
+        .mobile-nav-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        .mobile-nav-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            opacity: 0.7;
+        }
+
+        .mobile-nav .contact-btn {
+            margin-top: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 80px 80px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+                        url('images/accomplishments-hero.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments-section {
+            padding: 80px;
+            background: var(--white);
+        }
+
+        .accomplishments-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 80px;
+        }
+
+        .accomplishments-title {
+            flex: 0 0 300px;
+        }
+
+        .accomplishments-title h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .accomplishments-list {
+            flex: 1;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .accordion-header:hover {
+            opacity: 0.7;
+        }
+
+        .accordion-header h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--black);
+        }
+
+        .accordion-icon {
+            font-size: 24px;
+            color: var(--black);
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion-content p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--gray-text);
+            padding-bottom: 25px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            position: relative;
+            padding: 150px 80px 120px;
+            background: var(--black);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--white);
+            clip-path: ellipse(60% 100% at 50% 0%);
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .btn-yellow {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 20px 60px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-yellow:hover {
+            background: #e6d030;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 80px 80px;
+            background: var(--white);
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-contact {
+            text-align: left;
+        }
+
+        .footer-contact h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-contact a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .footer-links {
+            text-align: left;
+        }
+
+        .footer-links h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .accomplishments-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .accomplishments-title {
+                flex: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .contact-btn.desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: 100px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .accomplishments-section,
+            footer {
+                padding: 60px 20px;
+            }
+
+            .cta-section {
+                padding: 120px 20px 80px;
+            }
+
+            .cta-section::before {
+                height: 60px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .accordion-header h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/logo.webp" alt="Step By Step Communications">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="accomplishments.html" class="active">Accomplishments</a>
+            <a href="clients.html">Clients</a>
+        </nav>
+        <button class="contact-btn desktop">CONTACT</button>
+        <div class="hamburger" onclick="toggleMobileNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-close" onclick="closeMobileNav()"></div>
+        <a href="index.html" onclick="closeMobileNav()">Home</a>
+        <a href="about.html" onclick="closeMobileNav()">About</a>
+        <a href="services.html" onclick="closeMobileNav()">Services</a>
+        <a href="accomplishments.html" onclick="closeMobileNav()">Accomplishments</a>
+        <a href="clients.html" onclick="closeMobileNav()">Clients</a>
+        <button class="contact-btn" onclick="closeMobileNav()">CONTACT</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>A Chronicle of Excellence in Media Advertising</h1>
+            <p>At Step By Step Communications, we've built a legacy of transformative successes that resonate throughout the media advertising industry. Our track record is marked by strategic breakthroughs and pioneering initiatives that have not only shaped our story but also the narratives of the brands we partner with. As we share our key achievements, we celebrate the collaborative spirit and strategic innovation that fuel our ongoing pursuit of advertising excellence.</p>
+        </div>
+    </section>
+
+    <!-- Accomplishments Section -->
+    <section class="accomplishments-section">
+        <div class="accomplishments-content">
+            <div class="accomplishments-title">
+                <h2>Accomplishments</h2>
+            </div>
+            <div class="accomplishments-list">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3>Trailblazing Revenue Growth</h3>
+                        <span class="accordion-icon">∨</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>In a market known for fierce competition, our strategic ingenuity led to a staggering growth in advertising sales revenue, catapulting from $3.7 million to over $34.5 million in just four years. This growth trajectory is more than a number—it's a narrative of relentless pursuit of excellence and the creation of value for our clients.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3>Leadership in Diversity Marketing</h3>
+                        <span class="accordion-icon">∨</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Elverage Allen's recognition by Broadcast & Cable Magazine as the Ad Sales Executive of the Year in 2016 for Diversity Marketing is not merely an award—it's a symbol of our leadership in carving out space for diverse voices in advertising. It reflects our deep-seated belief that diversity is not just good ethics, it's good business.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3>Visibility for New Networks</h3>
+                        <span class="accordion-icon">∨</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Our strategic acumen has been instrumental in scripting success stories for emerging TV networks. We crafted a visibility odyssey that involved meticulous market strategy development and a robust campaign to create awareness among advertising agency executives, planners, and buyers. This initiative didn't just raise profiles; it changed the game for our clients in the television network industry.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3>Strategic Partnerships and Market Expansion</h3>
+                        <span class="accordion-icon">∨</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The partnerships we've nurtured with top advertising agencies across the United States are a testament to our collaborative spirit and strategic foresight. These relationships have not only resulted in a 932% surge in general market advertising sales but have also woven a fabric of trust and reliability with industry giants.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Continuing the Legacy</h2>
+            <p>Our past accomplishments are stepping stones to future innovations. With each milestone, we reaffirm our commitment to setting industry benchmarks and fostering a culture of success. We invite you to be a part of this journey, where your goals become our next achievements.</p>
+            <a href="contact.html" class="btn-yellow">CONTACT US</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.webp" alt="Step By Step Communications">
+            </div>
+            <div class="footer-contact">
+                <h4>CONTACT</h4>
+                <a href="/cdn-cgi/l/email-protection#63060f150611020406020f0f060d2310170613011a10170613000c0e0e160d0a0002170a0c0d104d0d0617"><span class="__cf_email__" data-cfemail="3d58514b584f5c5a585c515158537d4e49584d5f444e49584d5e5250504853545e5c495452534e13535849">[email&#160;protected]</span></a>
+            </div>
+            <div class="footer-links">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="accomplishments.html">Accomplishments</a></li>
+                    <li><a href="clients.html">Clients</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function toggleMobileNav() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.querySelector('.hamburger').classList.remove('active');
+        }
+
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.accordion-item

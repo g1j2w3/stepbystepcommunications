@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Step By Step Communications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yellow: #F7E135;
+            --green: #009A44;
+            --dark-bg: #0a0a0a;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #f5f5f5;
+            --gray-text: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--gray-text);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-btn {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 12px 30px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #e6d030;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-close::before,
+        .mobile-nav-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        .mobile-nav-close::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            opacity: 0.7;
+        }
+
+        .mobile-nav .contact-btn {
+            margin-top: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            display: flex;
+            align-items: flex-end;
+            padding: 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(30, 20, 10, 0.6), rgba(30, 20, 10, 0.7)),
+                        url('images/about-hero.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+
+        /* Placeholder for hero background */
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, 
+                rgba(60, 50, 40, 0.8) 0%, 
+                rgba(40, 35, 30, 0.9) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--white);
+            line-height: 1.3;
+            max-width: 900px;
+        }
+
+        /* Meet Elverage Section */
+        .meet-section {
+            padding: 100px 80px;
+            background: var(--white);
+        }
+
+        .meet-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 80px;
+        }
+
+        .meet-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .meet-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .meet-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .meet-text {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .meet-text h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .meet-text p {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 18px;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.8;
+            color: var(--gray-text);
+            margin-bottom: 40px;
+        }
+
+        .btn-black {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-black:hover {
+            background: #333;
+        }
+
+        /* Your Media Amplified Section */
+        .amplified-section {
+            padding: 80px;
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .amplified-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .amplified-content h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 48px;
+            font-weight: 400;
+            font-style: normal;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .amplified-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .amplified-item {
+            text-align: center;
+        }
+
+        .amplified-item h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .amplified-item p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .cta-link {
+            text-align: center;
+        }
+
+        .cta-link a {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            transition: opacity 0.3s;
+        }
+
+        .cta-link a:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 80px 80px;
+            background: var(--white);
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-contact {
+            text-align: left;
+        }
+
+        .footer-contact h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-contact a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .footer-links {
+            text-align: left;
+        }
+
+        .footer-links h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .meet-content {
+                flex-direction: column;
+            }
+
+            .meet-image,
+            .meet-text {
+                max-width: 100%;
+            }
+
+            .amplified-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .contact-btn.desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .meet-section,
+            .amplified-section,
+            footer {
+                padding: 60px 20px;
+            }
+
+            .meet-text h2 {
+                font-size: 32px;
+            }
+
+            .amplified-content h2 {
+                font-size: 32px;
+            }
+
+            .cta-link a {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/logo.webp" alt="Step By Step Communications">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="services.html">Services</a>
+            <a href="accomplishments.html">Accomplishments</a>
+            <a href="clients.html">Clients</a>
+        </nav>
+        <button class="contact-btn desktop">CONTACT</button>
+        <div class="hamburger" onclick="toggleMobileNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-close" onclick="closeMobileNav()"></div>
+        <a href="index.html" onclick="closeMobileNav()">Home</a>
+        <a href="about.html" onclick="closeMobileNav()">About</a>
+        <a href="services.html" onclick="closeMobileNav()">Services</a>
+        <a href="accomplishments.html" onclick="closeMobileNav()">Accomplishments</a>
+        <a href="clients.html" onclick="closeMobileNav()">Clients</a>
+        <button class="contact-btn" onclick="closeMobileNav()">CONTACT</button>
+    </div>
+
+    <script>
+        function toggleMobileNav() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.querySelector('.hamburger').classList.remove('active');
+        }
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>For your brand's growth and impactful storytelling, we're dedicated to elevating your presence in the media landscape.</h1>
+        </div>
+    </section>
+
+    <!-- Meet Elverage Section -->
+    <section class="meet-section">
+        <div class="meet-content">
+            <div class="meet-image">
+                <img src="images/elverage-allen.jpg" alt="Elverage Allen">
+            </div>
+            <div class="meet-text">
+                <h2>Meet Elverage Allen</h2>
+                <p>Elverage Allen, the driving force behind Step By Step Communications, has revolutionized media advertising with his strategic and innovative approach. Under his leadership, the agency soared, increasing advertising sales revenue from $3.7 million to over $34.5 million in four years. His expertise in elevating new and emerging television networks has markedly increased their visibility and impact in the industry. Recognized for his outstanding contribution to diversity marketing, Allen was named the Ad Sales Executive of the Year by Broadcast & Cable Magazine in 2016. He is renowned for his ability to forge strong partnerships across major advertising markets and for his skill in developing campaigns that resonate with diverse audiences. Allen's leadership continues to steer Step By Step Communications towards new heights of success and influence in the media world.</p>
+                <a href="accomplishments.html" class="btn-black">Learn About Accomplishments</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your Media Amplified Section -->
+    <section class="amplified-section">
+        <div class="amplified-content">
+            <h2>Your Media, Amplified</h2>
+            <div class="amplified-grid">
+                <div class="amplified-item">
+                    <h3>Elevate Your Brand Story</h3>
+                    <p>Every brand has a story to tell. We're here to amplify your voice in a crowded marketplace and transform your narrative into compelling media campaigns.</p>
+                </div>
+                <div class="amplified-item">
+                    <h3>Cultivate Your Market Presence</h3>
+                    <p>Breaking into the media space can be challenging. We equip you with the tools and strategies to not only enter but also excel in the competitive advertising landscape with confidence.</p>
+                </div>
+                <div class="amplified-item">
+                    <h3>Amplify Your Audience Reach</h3>
+                    <p>Your potential is limitless. Let us help you unlock it by connecting your brand with wider audiences, enhancing engagement, and broadening your media influence.</p>
+                </div>
+            </div>
+            <div class="cta-link">
+                <a href="contact.html">Contact us to get started.</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.webp" alt="Step By Step Communications">
+            </div>
+            <div class="footer-contact">
+                <h4>CONTACT</h4>
+                <a href="/cdn-cgi/l/email-protection#bfdad3c9dacdded8daded3d3dad1ffcccbdacfddc6cccbdacfdcd0d2d2cad1d6dcdecbd6d0d1cc91d1dacb"><span class="__cf_email__" data-cfemail="254049534057444240444949404b6556514055475c56514055464a4848504b4c4644514c4a4b560b4b4051">[email&#160;protected]</span></a>
+            </div>
+            <div class="footer-links">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="accomplishments.

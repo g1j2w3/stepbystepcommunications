@@ -635,7 +635,7 @@
             </div>
             <div class="footer-contact">
                 <h4>CONTACT</h4>
-                <a href="/cdn-cgi/l/email-protection#63060f150611020406020f0f060d2310170613011a10170613000c0e0e160d0a0002170a0c0d104d0d0617"><span class="__cf_email__" data-cfemail="3d58514b584f5c5a585c515158537d4e49584d5f444e49584d5e5250504853545e5c495452534e13535849">[email&#160;protected]</span></a>
+                <a href="/cdn-cgi/l/email-protection#3b5e574d5e495a5c5e5a57575e557b484f5e4b5942484f5e4b585456564e5552585a4f5254554815555e4f"><span class="__cf_email__" data-cfemail="23464f554651424446424f4f464d6350574653415a50574653404c4e4e564d4a4042574a4c4d500d4d4657">[email&#160;protected]</span></a>
             </div>
             <div class="footer-links">
                 <h4>QUICK LINKS</h4>
@@ -650,7 +650,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         function toggleMobileNav() {
             document.getElementById('mobileNav').classList.toggle('active');
             document.querySelector('.hamburger').classList.toggle('active');
@@ -665,5 +665,14 @@
             const item = header.parentElement;
             const isActive = item.classList.contains('active');
             
-            // Close all accordion items
-            document.querySelectorAll('.accordion-item
+            document.querySelectorAll('.accordion-item').forEach(function(el) {
+                el.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -40,12 +40,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 30px 80px;
             background: var(--white);
         }
 
         .logo {
-            height: 80px;
+            height: 110px;
             width: auto;
         }
 
@@ -57,13 +57,13 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 50px;
         }
 
         nav a {
             color: var(--black);
             font-family: 'Source Sans Pro', sans-serif;
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 400;
             transition: opacity 0.3s;
             letter-spacing: 0.3px;
@@ -81,9 +81,9 @@
         .contact-btn {
             background: var(--black);
             color: var(--white);
-            padding: 12px 30px;
+            padding: 16px 40px;
             font-family: 'Source Sans Pro', sans-serif;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: 1px;
             border: none;
@@ -230,10 +230,80 @@
             text-underline-offset: 4px;
             color: var(--black);
             transition: opacity 0.3s;
+            display: block;
+            margin-bottom: 40px;
         }
 
         .contact-email:hover {
             opacity: 0.7;
+        }
+
+        .contact-form-page {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: #999;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: var(--black);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 30px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 18px 50px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #333;
         }
 
         /* Footer */
@@ -400,7 +470,31 @@
     <section class="contact-section">
         <div class="contact-content">
             <h1>Contact us.</h1>
-            <a href="/cdn-cgi/l/email-protection#3a5f564c5f485b5d5f5b56565f547a494e5f4a5843494e5f4a595557574f5453595b4e5355544914545f4e" class="contact-email"><span class="__cf_email__" data-cfemail="3c59504a594e5d5b595d505059527c4f48594c5e454f48594c5f5351514952555f5d485553524f12525948">[email&#160;protected]</span></a>
+            <a href="mailto:elverageallen@stepbystepcommunications.net" class="contact-email">elverageallen@stepbystepcommunications.net</a>
+            <form action="https://formspree.io/f/xdadyjkg" method="POST" class="contact-form-page">
+                <div class="form-group">
+                    <label>Name</label>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name <span>(required)</span></label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span>(required)</span></label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email <span>(required)</span></label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
         </div>
     </section>
 
@@ -412,9 +506,19 @@
             </div>
             <div class="footer-contact">
                 <h4>CONTACT</h4>
-                <a href="/cdn-cgi/l/email-protection#32575e445740535557535e5e575c7241465742504b41465742515d5f5f475c5b5153465b5d5c411c5c5746"><span class="__cf_email__" data-cfemail="1f7a73697a6d7e787a7e73737a715f6c6b7a6f7d666c6b7a6f7c7072726a71767c7e6b7670716c31717a6b">[email&#160;protected]</span></a>
+                <a href="mailto:elverageallen@stepbystepcommunications.net">elverageallen@stepbystepcommunications.net</a>
             </div>
             <div class="footer-links">
                 <h4>QUICK LINKS</h4>
                 <ul>
-                    <li><a href="index.html">Home</a
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="accomplishments.html">Accomplishments</a></li>
+                    <li><a href="clients.html">Clients</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html></

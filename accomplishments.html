@@ -486,6 +486,10 @@
                 padding: 15px 20px;
             }
 
+            .logo {
+                height: 70px;
+            }
+
             nav {
                 display: none;
             }
@@ -500,7 +504,7 @@
 
             .hero {
                 min-height: 60vh;
-                padding: 100px 20px 60px;
+                padding: 140px 20px 60px;
             }
 
             .hero h1 {
@@ -635,7 +639,7 @@
             </div>
             <div class="footer-contact">
                 <h4>CONTACT</h4>
-                <a href="mailto:elverageallen@stepbystepcommunications.net">elverageallen@stepbystepcommunications.net</a>
+                <a href="/cdn-cgi/l/email-protection#ea8f869c8f988b8d8f8b86868f84aa999e8f9a8893999e8f9a898587879f8483898b9e83858499c4848f9e"><span class="__cf_email__" data-cfemail="0f6a63796a7d6e686a6e63636a614f7c7b6a7f6d767c7b6a7f6c6062627a61666c6e7b6660617c21616a7b">[email&#160;protected]</span></a>
             </div>
             <div class="footer-links">
                 <h4>QUICK LINKS</h4>
@@ -650,7 +654,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function toggleMobileNav() {
             document.getElementById('mobileNav').classList.toggle('active');
             document.querySelector('.hamburger').classList.toggle('active');
@@ -664,15 +668,4 @@
         function toggleAccordion(header) {
             const item = header.parentElement;
             const isActive = item.classList.contains('active');
-            
-            document.querySelectorAll('.accordion-item').forEach(function(el) {
-                el.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        }
-    </script>
-</body>
-</html>
+        
